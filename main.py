@@ -55,7 +55,7 @@ def clientes_editar(id):
     conexion.commit()
     return render_template('modulos/clientes/edit.html',clientes=clientes)
 
-@app.route('/clientes/edit/actualizar')
+@app.route('/clientes/edit/actualizar', methods=['POST'])
 def clientes_actualizar():
     id=request.form['txtid']
     nombre=request.form['nombre']
@@ -65,9 +65,9 @@ def clientes_actualizar():
     sql="UPDATE clientes SET nombre=%s, telefono=%s, fecha=%s WHERE id=%s"
     datos=(nombre, telefono, fecha, id)
     
-    conexion=mysql.conecction
+    conexion=mysql.connection
     cursor=conexion.cursor()
-    cursor.execcute(sql, datos)
+    cursor.execute(sql, datos)
     conexion.commit()
     return redirect('/clientes')
 
